@@ -626,3 +626,58 @@ class DataSource(Base):
 
     def __repr__(self) -> str:
         return f"<DataSource {self.name} ({self.source_type})>"
+
+
+# ── 18. TaxonomyEntry ──────────────────────────────────────────────────────
+class TaxonomyEntry(Base):
+    """
+    A single entry in the fashion taxonomy.
+    Stores garment categories, fabrics, occasions, silhouettes etc.
+    as structured database records so agents can query them.
+    """
+    __tablename__ = "taxonomy_entries"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    taxonomy_type: Mapped[str] = mapped_column(String(30), nullable=False)
+    key: Mapped[str] = mapped_column(String(100), nullable=False)
+    label: Mapped[str] = mapped_column(String(100), nullable=False)
+    parent_key: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    family: Mapped[Optional[str]] = mapped_column(String(30), nullable=True)
+    season_tags: Mapped[Optional[list]] = mapped_column(JSON, default=list)
+    occasion_tags: Mapped[Optional[list]] = mapped_column(JSON, default=list)
+    modesty_min: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    formality: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    metadata_json: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    sort_order: Mapped[int] = mapped_column(Integer, default=0)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+    __table_args__ = (
+        UniqueConstraint("taxonomy_type", "key", name="uq_taxonomy_type_key"),
+    )
+
+    def __repr__(self) -> str:
+        return f"<TaxonomyEntry {self.taxonomy_type}:{self.key}>"
+
+
+# ── 19. ColorPalette ───────────────────────────────────────────────────────
+class ColorPalette(Base):
+    """
+    STYLEIQ's structured color system.
+    Every color has a family, hex code, and Pakistani context flag.
+    """
+    __tablename__ = "color_palette"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    slug: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    hex_code: Mapped[Optional[str]] = mapped_column(String(7), nullable=True)
+    family: Mapped[str] = mapped_column(String(30), nullable=False)
+    is_neutral: Mapped[bool] = mapped_column(Boolean, default=False)
+    is_traditional_pk: Mapped[bool] = mapped_column(Boolean, default=False)
+    season_affinity: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    notes: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
+    sort_order: Mapped[int] = mapped_column(Integer, default=0)
+
+    def __repr__(self) -> str:
+        return f"<ColorPalette {self.name} ({self.family})>"

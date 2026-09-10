@@ -127,5 +127,40 @@ def demo():
     console.print()
     log.info("Demo completed successfully")
 
+@app.command()
+def taxonomy():
+    """Show the Pakistani fashion taxonomy summary."""
+    settings, log = _startup()
+    from styleiq.taxonomy.service import taxonomy as tx
+
+    console.print()
+    console.print(Panel("[bold gold1]STYLEIQ Fashion Taxonomy[/bold gold1]", border_style="gold1"))
+
+    summary = tx.summary()
+    console.print("\n[bold cyan]Taxonomy Summary[/bold cyan]")
+    for key, value in summary.items():
+        console.print(f"  {key:<25} [green]{value}[/green]")
+
+    console.print("\n[bold cyan]Garment Families[/bold cyan]")
+    for family in tx.get_all_families():
+        cats = len(family["categories"])
+        console.print(f"  [gold1]{family['name']}[/gold1] — {cats} categories")
+
+    console.print("\n[bold cyan]Summer Fabrics (Islamabad)[/bold cyan]")
+    for fabric in tx.get_fabrics_for_city("islamabad", "summer"):
+        console.print(f"  • {fabric['name']} ({fabric['weight']} weight, {fabric['breathability']} breathability)")
+
+    console.print("\n[bold cyan]Wedding Occasions[/bold cyan]")
+    for occ in tx.get_wedding_occasions():
+        console.print(f"  • {occ['name']} — modesty common: {occ['modesty_common']}/5")
+
+    console.print("\n[bold cyan]Outfit Context — University, Islamabad, Summer, Modesty 4[/bold cyan]")
+    ctx = tx.get_outfit_context("university", "islamabad", "summer", 4)
+    console.print(f"  Suitable categories: {len(ctx['suitable_categories'])}")
+    console.print(f"  Suitable fabrics:    {len(ctx['suitable_fabrics'])}")
+    console.print(f"  Suitable colors:     {len(ctx['suitable_colors'])}")
+    console.print(f"  Modest categories:   {len(ctx['modest_categories'])}")
+    console.print()
+
 if __name__ == "__main__":
     app()

@@ -1,0 +1,175 @@
+{
+  "version": "1.0",
+  "market": "pakistan",
+  "garment_families": [
+    {
+      "id": "eastern",
+      "name": "Eastern",
+      "description": "Traditional and contemporary South Asian garments",
+      "categories": [
+        {"id": "shalwar_kameez", "name": "Shalwar Kameez", "formality": "casual_to_formal", "modesty_min": 3, "occasions": ["university", "office_casual", "dawat", "eid", "home"]},
+        {"id": "kurta_short", "name": "Short Kurta", "formality": "casual", "modesty_min": 2, "occasions": ["university", "cafe", "brunch", "home"]},
+        {"id": "kurta_midi", "name": "Midi Kurta", "formality": "casual_to_semi_formal", "modesty_min": 3, "occasions": ["university", "office_casual", "dawat", "brunch"]},
+        {"id": "kurta_long", "name": "Long Kurta", "formality": "semi_formal", "modesty_min": 3, "occasions": ["dawat", "eid", "office_formal", "friend_gathering"]},
+        {"id": "straight_shirt", "name": "Straight Shirt", "formality": "casual_to_semi_formal", "modesty_min": 3, "occasions": ["university", "office_casual", "dawat"]},
+        {"id": "a_line_shirt", "name": "A-Line Shirt", "formality": "casual_to_semi_formal", "modesty_min": 3, "occasions": ["university", "brunch", "dawat", "cafe"]},
+        {"id": "frock", "name": "Frock", "formality": "semi_formal_to_formal", "modesty_min": 3, "occasions": ["dawat", "eid", "formal_event", "dinner"]},
+        {"id": "two_piece", "name": "2-Piece", "formality": "casual_to_semi_formal", "modesty_min": 3, "occasions": ["university", "dawat", "eid", "office_casual"]},
+        {"id": "three_piece", "name": "3-Piece", "formality": "semi_formal_to_formal", "modesty_min": 4, "occasions": ["dawat", "eid", "formal_event", "dinner", "nikkah"]},
+        {"id": "gharara", "name": "Gharara", "formality": "formal", "modesty_min": 4, "occasions": ["mehndi", "nikkah", "baraat", "walima", "eid"]},
+        {"id": "sharara", "name": "Sharara", "formality": "formal", "modesty_min": 4, "occasions": ["mehndi", "nikkah", "baraat", "walima", "eid"]},
+        {"id": "lehenga", "name": "Lehenga", "formality": "formal", "modesty_min": 3, "occasions": ["baraat", "walima", "mehndi", "formal_event"]},
+        {"id": "saree", "name": "Saree", "formality": "formal", "modesty_min": 2, "occasions": ["formal_event", "walima", "dinner"]},
+        {"id": "anarkali", "name": "Anarkali", "formality": "semi_formal_to_formal", "modesty_min": 3, "occasions": ["dawat", "eid", "mehndi", "formal_event"]},
+        {"id": "unstitched", "name": "Unstitched Fabric", "formality": "any", "modesty_min": 1, "occasions": ["any"], "note": "Tailored by local tailor — silhouette chosen by user"}
+      ]
+    },
+    {
+      "id": "western",
+      "name": "Western",
+      "description": "Contemporary western-style garments",
+      "categories": [
+        {"id": "tshirt", "name": "T-Shirt", "formality": "casual", "modesty_min": 1, "occasions": ["home", "cafe", "university"]},
+        {"id": "blouse", "name": "Blouse/Shirt", "formality": "casual_to_semi_formal", "modesty_min": 2, "occasions": ["university", "office_casual", "brunch", "cafe"]},
+        {"id": "crop_top", "name": "Crop Top", "formality": "casual", "modesty_min": 1, "occasions": ["home", "cafe"]},
+        {"id": "jeans_straight", "name": "Straight Jeans", "formality": "casual", "modesty_min": 2, "occasions": ["university", "cafe", "brunch", "market"]},
+        {"id": "jeans_wide_leg", "name": "Wide-Leg Jeans", "formality": "casual_to_semi_formal", "modesty_min": 2, "occasions": ["university", "brunch", "cafe", "dinner"]},
+        {"id": "jeans_baggy", "name": "Baggy Jeans", "formality": "casual", "modesty_min": 2, "occasions": ["university", "cafe", "market"]},
+        {"id": "cargo_pants", "name": "Cargo Pants", "formality": "casual", "modesty_min": 2, "occasions": ["university", "market", "travel_local"]},
+        {"id": "trousers", "name": "Trousers", "formality": "semi_formal", "modesty_min": 2, "occasions": ["office_formal", "office_casual", "university", "dinner"]},
+        {"id": "skirt_midi", "name": "Midi Skirt", "formality": "casual_to_semi_formal", "modesty_min": 2, "occasions": ["brunch", "cafe", "dinner", "university"]},
+        {"id": "skirt_maxi", "name": "Maxi Skirt", "formality": "semi_formal", "modesty_min": 3, "occasions": ["dinner", "dawat", "formal_event"]},
+        {"id": "dress_midi", "name": "Midi Dress", "formality": "casual_to_semi_formal", "modesty_min": 2, "occasions": ["brunch", "dinner", "cafe"]},
+        {"id": "dress_maxi", "name": "Maxi Dress", "formality": "semi_formal", "modesty_min": 3, "occasions": ["dinner", "formal_event", "dawat"]},
+        {"id": "coord_set", "name": "Co-ord Set", "formality": "casual_to_semi_formal", "modesty_min": 2, "occasions": ["brunch", "cafe", "university", "dinner"]},
+        {"id": "blazer", "name": "Blazer", "formality": "semi_formal_to_formal", "modesty_min": 2, "occasions": ["office_formal", "office_casual", "dinner", "formal_event"]},
+        {"id": "jacket", "name": "Jacket", "formality": "casual", "modesty_min": 2, "occasions": ["university", "travel_local", "cafe"]},
+        {"id": "cardigan", "name": "Cardigan/Sweater", "formality": "casual", "modesty_min": 2, "occasions": ["university", "home", "cafe"]}
+      ]
+    },
+    {
+      "id": "modest",
+      "name": "Modest/Abaya",
+      "description": "Full-coverage modest fashion",
+      "categories": [
+        {"id": "abaya_basic", "name": "Basic Abaya", "formality": "casual_to_formal", "modesty_min": 5, "occasions": ["any"]},
+        {"id": "abaya_embroidered", "name": "Embroidered Abaya", "formality": "semi_formal_to_formal", "modesty_min": 5, "occasions": ["dawat", "eid", "formal_event", "nikkah"]},
+        {"id": "abaya_open_front", "name": "Open-Front Abaya", "formality": "casual_to_semi_formal", "modesty_min": 4, "occasions": ["university", "market", "dawat"]},
+        {"id": "long_dress", "name": "Long Modest Dress", "formality": "casual_to_formal", "modesty_min": 4, "occasions": ["any"]},
+        {"id": "longline_shirt", "name": "Longline Shirt", "formality": "casual", "modesty_min": 3, "occasions": ["university", "home", "market"]},
+        {"id": "oversized_set", "name": "Oversized Co-ord Set", "formality": "casual", "modesty_min": 3, "occasions": ["university", "home", "cafe"]}
+      ]
+    },
+    {
+      "id": "fusion",
+      "name": "Fusion/Mixed",
+      "description": "Mixed eastern-western styling combinations",
+      "categories": [
+        {"id": "kurta_jeans", "name": "Kurta + Jeans", "formality": "casual_to_semi_formal", "modesty_min": 3, "occasions": ["university", "cafe", "brunch", "market"]},
+        {"id": "kurta_trousers", "name": "Kurta + Trousers", "formality": "semi_formal", "modesty_min": 3, "occasions": ["office_casual", "dawat", "university"]},
+        {"id": "western_top_eastern_bottom", "name": "Western Top + Eastern Bottom", "formality": "casual", "modesty_min": 2, "occasions": ["university", "cafe", "brunch"]},
+        {"id": "blazer_kurta", "name": "Blazer + Kurta", "formality": "semi_formal", "modesty_min": 3, "occasions": ["office_formal", "university", "dinner"]},
+        {"id": "abaya_sneakers", "name": "Abaya + Sneakers", "formality": "casual", "modesty_min": 5, "occasions": ["university", "market", "travel_local"]}
+      ]
+    }
+  ],
+  "fabrics": [
+    {"id": "lawn", "name": "Lawn", "season": "summer", "weight": "light", "breathability": "high", "formality": "casual_to_semi_formal", "cities_suitable": ["karachi", "lahore", "islamabad", "multan", "faisalabad"], "price_tier": "budget_to_mid", "care": "machine_wash", "note": "Most popular Pakistani summer fabric"},
+    {"id": "cotton", "name": "Cotton", "season": "summer", "weight": "light", "breathability": "high", "formality": "casual", "cities_suitable": ["all"], "price_tier": "budget", "care": "machine_wash"},
+    {"id": "chiffon", "name": "Chiffon", "season": "summer", "weight": "light", "breathability": "medium", "formality": "semi_formal_to_formal", "cities_suitable": ["all"], "price_tier": "mid", "care": "hand_wash"},
+    {"id": "voile", "name": "Voile", "season": "summer", "weight": "very_light", "breathability": "very_high", "formality": "casual_to_semi_formal", "cities_suitable": ["karachi", "multan", "lahore"], "price_tier": "budget", "care": "hand_wash"},
+    {"id": "linen", "name": "Linen", "season": "summer", "weight": "light_to_medium", "breathability": "high", "formality": "casual_to_semi_formal", "cities_suitable": ["all"], "price_tier": "mid", "care": "hand_wash"},
+    {"id": "karandi", "name": "Karandi", "season": "all_season", "weight": "medium", "breathability": "medium", "formality": "semi_formal_to_formal", "cities_suitable": ["all"], "price_tier": "mid_to_premium", "care": "dry_clean"},
+    {"id": "khaddar_light", "name": "Light Khaddar", "season": "transitional", "weight": "medium", "breathability": "medium", "formality": "casual_to_semi_formal", "cities_suitable": ["all"], "price_tier": "budget_to_mid", "care": "machine_wash"},
+    {"id": "khaddar_heavy", "name": "Heavy Khaddar", "season": "winter", "weight": "heavy", "breathability": "low", "formality": "casual_to_semi_formal", "cities_suitable": ["islamabad", "rawalpindi", "peshawar", "quetta", "lahore"], "price_tier": "budget_to_mid", "care": "machine_wash"},
+    {"id": "velvet", "name": "Velvet", "season": "winter", "weight": "heavy", "breathability": "low", "formality": "formal", "cities_suitable": ["islamabad", "rawalpindi", "peshawar", "quetta", "lahore"], "price_tier": "premium", "care": "dry_clean", "note": "Peak wedding season fabric"},
+    {"id": "silk", "name": "Silk", "season": "winter", "weight": "medium", "breathability": "medium", "formality": "formal", "cities_suitable": ["all"], "price_tier": "premium", "care": "dry_clean"},
+    {"id": "wool", "name": "Wool/Tweed", "season": "winter", "weight": "heavy", "breathability": "low", "formality": "casual_to_semi_formal", "cities_suitable": ["islamabad", "rawalpindi", "peshawar", "quetta"], "price_tier": "mid_to_premium", "care": "dry_clean"},
+    {"id": "denim", "name": "Denim", "season": "all_season", "weight": "medium", "breathability": "medium", "formality": "casual", "cities_suitable": ["all"], "price_tier": "budget_to_mid", "care": "machine_wash"},
+    {"id": "georgette", "name": "Georgette", "season": "summer", "weight": "light", "breathability": "medium", "formality": "semi_formal_to_formal", "cities_suitable": ["all"], "price_tier": "mid", "care": "dry_clean"},
+    {"id": "organza", "name": "Organza", "season": "transitional", "weight": "light", "breathability": "medium", "formality": "formal", "cities_suitable": ["all"], "price_tier": "mid_to_premium", "care": "dry_clean"},
+    {"id": "jersey", "name": "Jersey/Knit", "season": "all_season", "weight": "medium", "breathability": "medium", "formality": "casual", "cities_suitable": ["all"], "price_tier": "budget", "care": "machine_wash"}
+  ],
+  "occasions": [
+    {"id": "university", "name": "University", "formality": "casual", "modesty_common": 3, "budget_sensitivity": "high", "key_considerations": ["comfortable", "practical", "modest", "weather_aware"]},
+    {"id": "office_casual", "name": "Office (Casual)", "formality": "semi_formal", "modesty_common": 3, "budget_sensitivity": "medium", "key_considerations": ["professional", "comfortable", "modest"]},
+    {"id": "office_formal", "name": "Office (Formal)", "formality": "formal", "modesty_common": 4, "budget_sensitivity": "medium", "key_considerations": ["professional", "polished", "modest", "pressed"]},
+    {"id": "brunch", "name": "Brunch", "formality": "casual_to_semi_formal", "modesty_common": 2, "budget_sensitivity": "medium", "key_considerations": ["stylish", "comfortable", "photo_ready"]},
+    {"id": "dawat", "name": "Dawat (Dinner Invitation)", "formality": "semi_formal", "modesty_common": 4, "budget_sensitivity": "medium", "key_considerations": ["modest", "polished", "eastern_preferred"]},
+    {"id": "dinner", "name": "Dinner Out", "formality": "semi_formal", "modesty_common": 3, "budget_sensitivity": "medium", "key_considerations": ["stylish", "evening_appropriate"]},
+    {"id": "cafe", "name": "Cafe Outing", "formality": "casual", "modesty_common": 2, "budget_sensitivity": "high", "key_considerations": ["trendy", "comfortable", "photo_ready"]},
+    {"id": "eid", "name": "Eid", "formality": "semi_formal_to_formal", "modesty_common": 4, "budget_sensitivity": "low", "key_considerations": ["festive", "new_outfit", "eastern_strongly_preferred", "modest", "colorful_or_pastel"]},
+    {"id": "eid_milan", "name": "Eid Milan", "formality": "semi_formal", "modesty_common": 4, "budget_sensitivity": "medium", "key_considerations": ["comfortable_for_socializing", "festive", "eastern_preferred"]},
+    {"id": "mehndi", "name": "Mehndi", "formality": "semi_formal_to_formal", "modesty_common": 4, "budget_sensitivity": "low", "key_considerations": ["colorful", "festive", "eastern", "embellished", "yellows_oranges_greens_preferred"]},
+    {"id": "dholki", "name": "Dholki", "formality": "casual_to_semi_formal", "modesty_common": 3, "budget_sensitivity": "medium", "key_considerations": ["fun", "colorful", "comfortable_for_dancing"]},
+    {"id": "nikkah", "name": "Nikkah", "formality": "formal", "modesty_common": 5, "budget_sensitivity": "low", "key_considerations": ["modest", "elegant", "eastern", "whites_creams_pastels_preferred"]},
+    {"id": "baraat", "name": "Baraat", "formality": "formal", "modesty_common": 4, "budget_sensitivity": "low", "key_considerations": ["festive", "embellished", "rich_colors", "eastern"]},
+    {"id": "walima", "name": "Walima", "formality": "formal", "modesty_common": 4, "budget_sensitivity": "low", "key_considerations": ["elegant", "pastels_or_neutrals", "eastern", "modest"]},
+    {"id": "airport", "name": "Airport/Travel", "formality": "casual", "modesty_common": 3, "budget_sensitivity": "high", "key_considerations": ["comfortable", "practical", "layers", "weather_aware"]},
+    {"id": "home", "name": "Home", "formality": "casual", "modesty_common": 1, "budget_sensitivity": "very_high", "key_considerations": ["comfortable", "practical"]}
+  ],
+  "colors": {
+    "neutrals": [
+      {"name": "White", "hex": "#FFFFFF", "season": "all", "formality": "all", "pk_popularity": "very_high"},
+      {"name": "Off-White", "hex": "#FAF9F6", "season": "all", "formality": "all", "pk_popularity": "very_high"},
+      {"name": "Ivory", "hex": "#FFFFF0", "season": "all", "formality": "semi_formal_to_formal", "pk_popularity": "high"},
+      {"name": "Beige", "hex": "#F5F0EB", "season": "all", "formality": "all", "pk_popularity": "high"},
+      {"name": "Cream", "hex": "#FFFDD0", "season": "all", "formality": "all", "pk_popularity": "high"},
+      {"name": "Camel", "hex": "#C19A6B", "season": "autumn_winter", "formality": "all", "pk_popularity": "medium"},
+      {"name": "Light Grey", "hex": "#D3D3D3", "season": "all", "formality": "all", "pk_popularity": "medium"},
+      {"name": "Charcoal", "hex": "#36454F", "season": "winter", "formality": "semi_formal", "pk_popularity": "medium"},
+      {"name": "Black", "hex": "#000000", "season": "all", "formality": "all", "pk_popularity": "very_high"}
+    ],
+    "earth_tones": [
+      {"name": "Chocolate Brown", "hex": "#7B3F00", "season": "autumn_winter", "formality": "all", "pk_popularity": "rising", "trend_status": "rising"},
+      {"name": "Rust", "hex": "#B7410E", "season": "autumn_winter", "formality": "casual_to_semi_formal", "pk_popularity": "medium"},
+      {"name": "Terracotta", "hex": "#E2725B", "season": "autumn_winter", "formality": "casual_to_semi_formal", "pk_popularity": "medium"},
+      {"name": "Olive", "hex": "#808000", "season": "all", "formality": "casual", "pk_popularity": "medium"},
+      {"name": "Sage Green", "hex": "#87AE73", "season": "spring_summer", "formality": "casual_to_semi_formal", "pk_popularity": "emerging", "trend_status": "emerging"},
+      {"name": "Khaki", "hex": "#C3B091", "season": "all", "formality": "casual", "pk_popularity": "medium"},
+      {"name": "Mushroom", "hex": "#C9B99A", "season": "all", "formality": "all", "pk_popularity": "medium"}
+    ],
+    "pastels": [
+      {"name": "Blush Pink", "hex": "#FFB6C1", "season": "spring_summer", "formality": "all", "pk_popularity": "very_high"},
+      {"name": "Lilac", "hex": "#C8A2C8", "season": "spring", "formality": "semi_formal", "pk_popularity": "high"},
+      {"name": "Mint", "hex": "#98FF98", "season": "summer", "formality": "casual_to_semi_formal", "pk_popularity": "medium"},
+      {"name": "Powder Blue", "hex": "#B0E0E6", "season": "spring_summer", "formality": "casual_to_semi_formal", "pk_popularity": "medium"},
+      {"name": "Peach", "hex": "#FFCBA4", "season": "spring_summer", "formality": "all", "pk_popularity": "high"},
+      {"name": "Lavender", "hex": "#E6E6FA", "season": "spring", "formality": "semi_formal", "pk_popularity": "high"}
+    ],
+    "jewel_tones": [
+      {"name": "Emerald Green", "hex": "#50C878", "season": "winter", "formality": "formal", "pk_popularity": "high"},
+      {"name": "Navy Blue", "hex": "#000080", "season": "all", "formality": "semi_formal_to_formal", "pk_popularity": "very_high"},
+      {"name": "Burgundy", "hex": "#800020", "season": "winter", "formality": "formal", "pk_popularity": "high"},
+      {"name": "Teal", "hex": "#008080", "season": "all", "formality": "casual_to_formal", "pk_popularity": "high"},
+      {"name": "Plum", "hex": "#8E4585", "season": "winter", "formality": "formal", "pk_popularity": "high"},
+      {"name": "Cobalt Blue", "hex": "#0047AB", "season": "all", "formality": "casual_to_formal", "pk_popularity": "medium"}
+    ],
+    "traditional_pk": [
+      {"name": "Mehendi Green", "hex": "#4B6A3F", "season": "mehndi_occasion", "formality": "festive", "pk_popularity": "high", "note": "Strongly associated with mehndi functions"},
+      {"name": "Surkh (Deep Red)", "hex": "#8B0000", "season": "winter_wedding", "formality": "formal_festive", "pk_popularity": "very_high", "note": "Traditional baraat/wedding color"},
+      {"name": "Angoor (Wine)", "hex": "#722F37", "season": "winter", "formality": "formal", "pk_popularity": "high"},
+      {"name": "Zard (Golden Yellow)", "hex": "#FFD700", "season": "festive", "formality": "festive", "pk_popularity": "high", "note": "Common for mehndi and festive occasions"},
+      {"name": "Firozi (Turquoise)", "hex": "#40E0D0", "season": "summer", "formality": "casual_to_semi_formal", "pk_popularity": "high"}
+    ]
+  },
+  "silhouettes": [
+    {"id": "fitted", "name": "Fitted", "body_note": "Follows body shape closely", "modesty_impact": "lower", "formality": "all"},
+    {"id": "relaxed", "name": "Relaxed", "body_note": "Comfortable, not tight", "modesty_impact": "neutral", "formality": "casual"},
+    {"id": "a_line", "name": "A-Line", "body_note": "Fitted at top, flares from waist", "modesty_impact": "higher", "formality": "casual_to_formal"},
+    {"id": "straight", "name": "Straight/Column", "body_note": "Same width top to bottom", "modesty_impact": "neutral", "formality": "all"},
+    {"id": "oversized", "name": "Oversized", "body_note": "Larger than body size", "modesty_impact": "higher", "formality": "casual"},
+    {"id": "flared", "name": "Flared", "body_note": "Widens significantly at hem", "modesty_impact": "higher", "formality": "casual_to_formal"},
+    {"id": "wrap", "name": "Wrap", "body_note": "Wraps around and ties", "modesty_impact": "medium", "formality": "casual_to_semi_formal"},
+    {"id": "tiered", "name": "Tiered/Layered", "body_note": "Multiple horizontal layers", "modesty_impact": "higher", "formality": "casual_to_semi_formal"}
+  ],
+  "city_climate": {
+    "karachi": {"summer_temp": "35-40C", "winter_temp": "15-25C", "humidity": "high", "rain": "low", "winter_severity": "mild", "recommended_winter_fabrics": ["light_khaddar", "karandi", "linen"], "recommended_summer_fabrics": ["lawn", "cotton", "voile", "chiffon"]},
+    "lahore": {"summer_temp": "38-45C", "winter_temp": "5-15C", "humidity": "medium", "rain": "moderate", "winter_severity": "moderate", "recommended_winter_fabrics": ["khaddar_heavy", "velvet", "wool", "karandi"], "recommended_summer_fabrics": ["lawn", "cotton", "voile"]},
+    "islamabad": {"summer_temp": "30-38C", "winter_temp": "2-12C", "humidity": "medium", "rain": "high", "winter_severity": "cold", "recommended_winter_fabrics": ["khaddar_heavy", "wool", "velvet", "karandi"], "recommended_summer_fabrics": ["lawn", "linen", "cotton", "chiffon"]},
+    "rawalpindi": {"summer_temp": "30-38C", "winter_temp": "2-12C", "humidity": "medium", "rain": "high", "winter_severity": "cold", "recommended_winter_fabrics": ["khaddar_heavy", "wool", "velvet", "karandi"], "recommended_summer_fabrics": ["lawn", "linen", "cotton"]},
+    "peshawar": {"summer_temp": "35-42C", "winter_temp": "2-10C", "humidity": "low", "rain": "moderate", "winter_severity": "cold", "recommended_winter_fabrics": ["khaddar_heavy", "wool", "velvet"], "recommended_summer_fabrics": ["lawn", "cotton", "voile"]},
+    "multan": {"summer_temp": "40-48C", "winter_temp": "8-18C", "humidity": "low", "rain": "very_low", "winter_severity": "mild", "recommended_winter_fabrics": ["khaddar_light", "karandi", "linen"], "recommended_summer_fabrics": ["voile", "lawn", "cotton"]},
+    "quetta": {"summer_temp": "25-35C", "winter_temp": "-2-8C", "humidity": "very_low", "rain": "low", "winter_severity": "very_cold", "recommended_winter_fabrics": ["wool", "khaddar_heavy", "velvet", "silk"], "recommended_summer_fabrics": ["lawn", "linen", "cotton"]}
+  }
+}
