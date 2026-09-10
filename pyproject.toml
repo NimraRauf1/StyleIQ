@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "styleiq"
+version = "0.1.0"
+description = "Pakistan Fashion Intelligence & Personal Stylist Agent"
+requires-python = ">=3.11"
+authors = [{ name = "Nimra" }]
+
+[project.scripts]
+styleiq = "styleiq.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["styleiq*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
