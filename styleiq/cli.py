@@ -34,11 +34,11 @@ def status():
     table.add_column("Key", style="dim")
     table.add_column("Value", style="bold")
     checks = [
-        ("Environment",     status_obj.environment),
-        ("Data Directory",  "✓ exists" if status_obj.data_dir_exists else "✗ missing"),
-        ("Database",        "✗ not connected (Milestone 2)" if not status_obj.database_connected else "✓ connected"),
-        ("Claude API",      "✓ configured" if status_obj.claude_configured else "✗ not configured"),
-        ("Default City",    settings.weather.default_city),
+        ("Environment",    status_obj.environment),
+        ("Data Directory", "✓ exists" if status_obj.data_dir_exists else "✗ missing"),
+        ("Database",       "✗ not connected (Milestone 2)" if not status_obj.database_connected else "✓ connected"),
+        ("Claude API",     "✓ configured" if status_obj.claude_configured else "✗ not configured"),
+        ("Default City",   settings.weather.default_city),
     ]
     for key, value in checks:
         style = "green" if "✓" in value else "yellow"
@@ -61,7 +61,7 @@ def demo():
         preferred_aesthetics=["minimal", "feminine", "contemporary"],
         budget_min=2000, budget_max=8000,
     )
-    console.print(f"  Profile: {profile.age}y | {profile.city} | PKR {profile.budget_min:,}–{profile.budget_max:,}")
+    console.print(f"  Profile: {profile.age}y | {profile.city} | PKR {profile.budget_min:,}-{profile.budget_max:,}")
     dna = StyleDNA(user_id=uuid4(), minimal=82.0, feminine=78.0, contemporary=71.0,
                    eastern_affinity=64.0, modesty_score=80.0)
     console.print(f"  Style Archetype: [bold gold1]{dna.style_archetype}[/bold gold1]")
@@ -105,61 +105,132 @@ def brands():
 
 @app.command()
 def trends():
-    """Show trend intelligence — scored and ranked Pakistani fashion trends."""
+    """Show trend intelligence."""
     settings, log = _startup()
     from styleiq.services.trend_service import trend_service
-
     console.print()
     console.print(Panel("[bold gold1]STYLEIQ Trend Intelligence[/bold gold1]", border_style="gold1"))
-
-    # Save scores to DB first
-    saved = trend_service.save_scores_to_db()
-    console.print(f"\n[dim]Computed and saved {saved} trend scores[/dim]")
-
-    # Top trends now
     console.print("\n[bold cyan]Trending Now — Pakistan Fashion[/bold cyan]")
     top_trends = trend_service.get_trending_now(top_n=5)
-
     for i, t in enumerate(top_trends, 1):
-        status_color = {
-            "emerging": "yellow", "rising": "green",
-            "peaking": "bold green", "declining": "red",
-        }.get(t.status, "white")
-
+        status_color = {"emerging": "yellow", "rising": "green", "peaking": "bold green", "declining": "red"}.get(t.status, "white")
         console.print(f"\n  [bold]{i}. {t.trend_name}[/bold] [{t.category}]")
-        console.print(f"     Status:     [{status_color}]{t.status.upper()}[/{status_color}]")
-        console.print(f"     Score:      [bold]{t.total_score}/100[/bold]")
-        console.print(f"     Popularity: {t.popularity_score}  |  Growth: {t.growth_score}  |  Cross-Brand: {t.cross_brand_score}  |  Seasonal: {t.seasonal_score}")
-        if t.brand_count:
-            console.print(f"     Brands:     {int(t.brand_count)} brands")
+        console.print(f"     Status: [{status_color}]{t.status.upper()}[/{status_color}]  Score: [bold]{t.total_score}/100[/bold]")
+        console.print(f"     Popularity: {t.popularity_score}  Growth: {t.growth_score}  Cross-Brand: {t.cross_brand_score}  Seasonal: {t.seasonal_score}")
         if t.growth_rate_pct is not None:
-            console.print(f"     Growth:     {t.growth_rate_pct:+.1f}% search volume change")
+            console.print(f"     Growth Rate: {t.growth_rate_pct:+.1f}% search volume")
+    console.print()
 
-    # Emerging trends
-    console.print("\n[bold cyan]Emerging Trends — Watch These[/bold cyan]")
-    emerging = trend_service.get_emerging_trends()
-    if emerging:
-        for t in emerging:
-            console.print(f"  • [yellow]{t.trend_name}[/yellow] [{t.category}] — Score: {t.total_score}")
-    else:
-        console.print("  [dim]No emerging trends detected yet[/dim]")
+@app.command()
+def dna():
+    """Run Style DNA demo — onboarding, interactions, evolution."""
+    settings, log = _startup()
+    from styleiq.services.style_dna_service import style_dna_service
 
-    # Full report for top trend
-    console.print("\n[bold cyan]Full Report — Chocolate Brown[/bold cyan]")
-    report = trend_service.get_trend_report("Chocolate Brown")
-    if report:
-        console.print(f"  Name:        {report.name}")
-        console.print(f"  Category:    {report.category}")
-        console.print(f"  Status:      {report.status}")
-        console.print(f"  Season:      {report.season}")
-        console.print(f"  Signals:     {report.total_signals}")
-        console.print(f"  Score:       {report.score.total_score}/100")
-        console.print(f"  Insight:     {report.trend_insight}")
-        console.print(f"  Status:      {report.status_explanation}")
-        console.print("\n  [dim]Supporting Evidence:[/dim]")
-        if report.score:
-            for evidence in report.score.supporting_signals:
-                console.print(f"    → {evidence}")
+    console.print()
+    console.print(Panel("[bold gold1]STYLEIQ Style DNA Demo[/bold gold1]", border_style="gold1"))
+
+    # Create test user
+    console.print("\n[bold cyan]1. Creating User[/bold cyan]")
+    user_id = style_dna_service.create_user(
+        email="nimra@styleiq.demo",
+        username="nimra_demo",
+    )
+    console.print(f"  User ID: {user_id[:16]}...")
+
+    # Seed from onboarding
+    console.print("\n[bold cyan]2. Seeding Style DNA from Onboarding[/bold cyan]")
+    console.print("  Age: 22 | City: Islamabad | Modesty: 4/5")
+    console.print("  Aesthetics: minimal, feminine, contemporary")
+    console.print("  Occasions: university, brunch, dawat, eid")
+
+    initial_dna = style_dna_service.seed_from_onboarding(
+        user_id=user_id,
+        age=22,
+        city="islamabad",
+        modesty_level=4,
+        eastern_western_pref=0.4,
+        preferred_aesthetics=["minimal", "feminine", "contemporary"],
+        preferred_silhouettes=["a_line", "straight", "relaxed"],
+        preferred_colors=["beige", "white", "olive"],
+        usual_occasions=["university", "brunch", "dawat", "eid"],
+        budget_min=2000,
+        budget_max=8000,
+    )
+
+    console.print(f"\n  [dim]Initial DNA (Version {initial_dna.version}):[/dim]")
+    dims_initial = {
+        "Minimal": initial_dna.minimal,
+        "Feminine": initial_dna.feminine,
+        "Traditional": initial_dna.traditional,
+        "Contemporary": initial_dna.contemporary,
+        "Eastern Affinity": initial_dna.eastern_affinity,
+        "Modesty": initial_dna.modesty_score,
+    }
+    for name, score in dims_initial.items():
+        bar = "█" * int(score / 5) + "░" * (20 - int(score / 5))
+        console.print(f"  {name:<18} {bar} {score:.1f}")
+
+    archetype = style_dna_service.get_style_archetype(initial_dna)
+    console.print(f"\n  Style Archetype: [bold gold1]{archetype}[/bold gold1]")
+
+    # Simulate interactions
+    console.print("\n[bold cyan]3. Simulating Interactions[/bold cyan]")
+    interactions = [
+        ("like",    ["minimal", "contemporary", "clean_girl"], "western",  2, "Liked a minimal western co-ord"),
+        ("save",    ["feminine", "romantic", "modest"],        "eastern",  4, "Saved a feminine modest kurta"),
+        ("like",    ["minimal", "classic"],                    "eastern",  3, "Liked a classic straight shirt"),
+        ("dislike", ["maximalist", "colorful"],                "eastern",  3, "Disliked a maximalist printed suit"),
+        ("skip",    ["streetwear", "edgy"],                    "western",  1, "Skipped a streetwear outfit"),
+        ("like",    ["feminine", "minimal", "soft_girl"],      "western",  3, "Liked a soft minimal dress"),
+        ("save",    ["traditional", "ethnic"],                 "eastern",  4, "Saved an ethnic embroidered 3-piece"),
+    ]
+    for itype, tags, family, modesty, desc in interactions:
+        style_dna_service.update_from_interaction(
+            user_id=user_id,
+            interaction_type=itype,
+            item_aesthetic_tags=tags,
+            item_garment_family=family,
+            item_modesty_level=modesty,
+        )
+        emoji = "♥" if itype == "like" else "★" if itype == "save" else "✗" if itype == "dislike" else "→"
+        console.print(f"  {emoji} [{itype.upper()}] {desc}")
+
+    # Show evolved DNA
+    console.print("\n[bold cyan]4. Evolved Style DNA[/bold cyan]")
+    final_dna = style_dna_service.get_current_dna(user_id)
+    console.print(f"  [dim]DNA after {final_dna.interaction_count} interactions (Version {final_dna.version}):[/dim]\n")
+
+    all_dims = {
+        "Minimal":         (initial_dna.minimal,          final_dna.minimal),
+        "Feminine":        (initial_dna.feminine,         final_dna.feminine),
+        "Traditional":     (initial_dna.traditional,      final_dna.traditional),
+        "Contemporary":    (initial_dna.contemporary,     final_dna.contemporary),
+        "Romantic":        (initial_dna.romantic,         final_dna.romantic),
+        "Streetwear":      (initial_dna.streetwear,       final_dna.streetwear),
+        "Eastern Affinity":(initial_dna.eastern_affinity, final_dna.eastern_affinity),
+        "Modesty":         (initial_dna.modesty_score,    final_dna.modesty_score),
+    }
+    for name, (before, after) in all_dims.items():
+        bar = "█" * int(after / 5) + "░" * (20 - int(after / 5))
+        change = after - before
+        if change > 0.5:
+            arrow = f"[green]+{change:.1f}[/green]"
+        elif change < -0.5:
+            arrow = f"[red]{change:.1f}[/red]"
+        else:
+            arrow = f"[dim]{change:.1f}[/dim]"
+        console.print(f"  {name:<18} {bar} {after:.1f}  ({arrow})")
+
+    final_archetype = style_dna_service.get_style_archetype(final_dna)
+    console.print(f"\n  Style Archetype: [bold gold1]{final_archetype}[/bold gold1]")
+
+    # DNA history
+    history = style_dna_service.get_dna_history(user_id)
+    console.print(f"\n[bold cyan]5. DNA Version History[/bold cyan]")
+    console.print(f"  {len(history)} versions stored")
+    console.print(f"  Version 1 → onboarding seed")
+    console.print(f"  Version {len(history)} → current (after {final_dna.interaction_count} interactions)")
     console.print()
 
 if __name__ == "__main__":
