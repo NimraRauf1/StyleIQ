@@ -59,13 +59,11 @@ def demo():
     settings, log = _startup()
     console.print()
     console.print(Panel("[bold gold1]STYLEIQ Schema Demo[/bold gold1]", border_style="gold1"))
-
     console.print("\n[bold cyan]1. Creating an OnboardingProfile[/bold cyan]")
     from styleiq.schemas import OnboardingProfile, ModestyLevel, PakistaniCity
     profile = OnboardingProfile(
         age=22, city=PakistaniCity.ISLAMABAD, occupation="University Student",
-        modesty_level=ModestyLevel.MODEST_FULL_COVERAGE,
-        eastern_western_preference=0.4,
+        modesty_level=ModestyLevel.MODEST_FULL_COVERAGE, eastern_western_preference=0.4,
         preferred_aesthetics=["minimal", "feminine", "contemporary"],
         preferred_colors=["beige", "white", "soft pink", "olive"],
         preferred_brands=["khaadi", "sapphire", "limelight"],
@@ -76,7 +74,6 @@ def demo():
     console.print(f"  City: {profile.city}")
     console.print(f"  Modesty Level: {profile.modesty_level} ({ModestyLevel(profile.modesty_level).name})")
     console.print(f"  Budget: PKR {profile.budget_min:,} – {profile.budget_max:,}")
-
     console.print("\n[bold cyan]2. Style DNA[/bold cyan]")
     from styleiq.schemas import StyleDNA
     dna = StyleDNA(
@@ -85,45 +82,11 @@ def demo():
         eastern_affinity=64.0, modesty_score=80.0, version=3, interaction_count=27,
     )
     console.print(f"  Style Archetype: [bold gold1]{dna.style_archetype}[/bold gold1]")
-    console.print(f"  DNA Version: {dna.version} (based on {dna.interaction_count} interactions)")
     for name, score in dna.top_aesthetics:
         bar = "█" * int(score / 5) + "░" * (20 - int(score / 5))
         console.print(f"    {name:<15} {bar} {score:.0f}/100")
-
-    console.print("\n[bold cyan]3. Trend Object[/bold cyan]")
-    from styleiq.schemas import TrendCreate, TrendSignalEntry, TrendCategory, TrendStatus
-    trend = TrendCreate(
-        name="Chocolate Brown", category=TrendCategory.COLOR,
-        season="winter", year=2025, status=TrendStatus.RISING,
-        signals=[
-            TrendSignalEntry(signal_type="brand_appearance", signal_value=8.0, source="manual_catalog_review"),
-            TrendSignalEntry(signal_type="search_volume", signal_value=34.0, source="google_trends_pk"),
-        ],
-    )
-    console.print(f"  Trend: [bold]{trend.name}[/bold]")
-    console.print(f"  Status: [green]{trend.status}[/green]")
-    console.print(f"  Signals: {len(trend.signals)}")
-
-    console.print("\n[bold cyan]4. Outfit Recommendation[/bold cyan]")
-    from styleiq.schemas import OutfitRecommendation, OutfitComponent, Occasion, Season
-    outfit = OutfitRecommendation(
-        occasion=Occasion.UNIVERSITY, season=Season.SUMMER,
-        components=[
-            OutfitComponent(role="top", description="White straight-cut shirt", brand_slug="nishat", estimated_price=3200),
-            OutfitComponent(role="bottom", description="Off-white shalwar", brand_slug="limelight", estimated_price=1800),
-            OutfitComponent(role="layer", description="Beige chiffon dupatta", brand_slug="zellbury", estimated_price=900),
-        ],
-        total_estimated_price=5900, modesty_level=ModestyLevel.MODEST_FULL_COVERAGE,
-        why_recommended="Matches minimal aesthetic. Neutral palette. Modest. Within PKR 8,000 budget.",
-        style_match_score=87.0, budget_match_score=92.0,
-        modesty_match_score=96.0, trend_relevance_score=74.0,
-        critic_passed=True, critic_notes="Passed all 7 constraints.",
-    )
-    console.print(f"  Total Price: [green]PKR {outfit.total_estimated_price:,}[/green]")
-    console.print(f"  Overall Score: [bold]{outfit.overall_score}/100[/bold]")
-    console.print(f"  Critic: [green]PASSED[/green]")
     console.print()
-    console.print(Panel("[green]✓ All schemas validated successfully.\nMilestone 1 complete. Foundation is solid.[/green]", border_style="green"))
+    console.print(Panel("[green]✓ All schemas validated successfully.[/green]", border_style="green"))
     console.print()
     log.info("Demo completed successfully")
 
@@ -132,34 +95,66 @@ def taxonomy():
     """Show the Pakistani fashion taxonomy summary."""
     settings, log = _startup()
     from styleiq.taxonomy.service import taxonomy as tx
-
     console.print()
     console.print(Panel("[bold gold1]STYLEIQ Fashion Taxonomy[/bold gold1]", border_style="gold1"))
-
     summary = tx.summary()
     console.print("\n[bold cyan]Taxonomy Summary[/bold cyan]")
     for key, value in summary.items():
         console.print(f"  {key:<25} [green]{value}[/green]")
-
     console.print("\n[bold cyan]Garment Families[/bold cyan]")
     for family in tx.get_all_families():
-        cats = len(family["categories"])
-        console.print(f"  [gold1]{family['name']}[/gold1] — {cats} categories")
-
-    console.print("\n[bold cyan]Summer Fabrics (Islamabad)[/bold cyan]")
-    for fabric in tx.get_fabrics_for_city("islamabad", "summer"):
-        console.print(f"  • {fabric['name']} ({fabric['weight']} weight, {fabric['breathability']} breathability)")
-
+        console.print(f"  [gold1]{family['name']}[/gold1] — {len(family['categories'])} categories")
     console.print("\n[bold cyan]Wedding Occasions[/bold cyan]")
     for occ in tx.get_wedding_occasions():
         console.print(f"  • {occ['name']} — modesty common: {occ['modesty_common']}/5")
+    console.print()
 
-    console.print("\n[bold cyan]Outfit Context — University, Islamabad, Summer, Modesty 4[/bold cyan]")
-    ctx = tx.get_outfit_context("university", "islamabad", "summer", 4)
-    console.print(f"  Suitable categories: {len(ctx['suitable_categories'])}")
-    console.print(f"  Suitable fabrics:    {len(ctx['suitable_fabrics'])}")
-    console.print(f"  Suitable colors:     {len(ctx['suitable_colors'])}")
-    console.print(f"  Modest categories:   {len(ctx['modest_categories'])}")
+@app.command()
+def brands():
+    """Show brand intelligence — compatibility scores for a sample user profile."""
+    settings, log = _startup()
+    from styleiq.services.brand_service import brand_service
+
+    console.print()
+    console.print(Panel("[bold gold1]STYLEIQ Brand Intelligence[/bold gold1]", border_style="gold1"))
+
+    # Sample user profile — university student, Islamabad, modest, minimal aesthetic
+    console.print("\n[bold cyan]User Profile (Sample)[/bold cyan]")
+    console.print("  Age: 22 | City: Islamabad | University Student")
+    console.print("  Budget: PKR 2,000 – 8,000")
+    console.print("  Modesty: 4/5 (Modest)")
+    console.print("  Aesthetics: minimal, feminine, contemporary")
+    console.print("  Occasions: university, brunch, dawat, eid")
+
+    console.print("\n[bold cyan]Top 5 Compatible Brands For You[/bold cyan]")
+    top_brands = brand_service.get_compatible_brands(
+        user_budget_min=2000,
+        user_budget_max=8000,
+        user_modesty_level=4,
+        user_style_tags=["minimal", "feminine"],
+        user_aesthetics=["minimal", "feminine", "contemporary"],
+        user_occasions=["university", "brunch", "dawat", "eid"],
+        top_n=5,
+    )
+
+    for i, score in enumerate(top_brands, 1):
+        console.print(f"\n  [bold]{i}. {score.brand_name}[/bold] [{score.brand_tier}]")
+        console.print(f"     Overall:  [bold green]{score.overall_score}/100[/bold green]")
+        console.print(f"     Style:    {score.style_match}/100  |  Budget: {score.budget_match}/100  |  Modesty: {score.modesty_match}/100  |  Occasion: {score.occasion_match}/100")
+        console.print(f"     Price:    PKR {score.typical_price_min:,}–{score.typical_price_max:,}")
+        console.print(f"     Summary:  [dim]{score.summary}[/dim]")
+
+    console.print("\n[bold cyan]Full Brand Report — Khaadi[/bold cyan]")
+    report = brand_service.get_brand_report("khaadi")
+    if report:
+        console.print(f"  Name:          {report.name}")
+        console.print(f"  Tier:          {report.tier}")
+        console.print(f"  Price Range:   {report.price_tier_label}")
+        console.print(f"  Modesty:       {report.modesty_label}")
+        console.print(f"  Style:         {report.eastern_western_label}")
+        console.print(f"  Style Tags:    {', '.join(report.style_tags)}")
+        console.print(f"  Best For:      {', '.join(report.best_for_occasions)}")
+        console.print(f"  Not Ideal For: {', '.join(report.not_ideal_for)}")
     console.print()
 
 if __name__ == "__main__":
